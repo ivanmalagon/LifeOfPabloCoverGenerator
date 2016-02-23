@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The life of Pablo - Alternative cover generator</title>
+  <meta name="description" content="The life of Pablo - Alternative cover generator">
+  <meta name="author" content="Ivan Malagon a.k.a. Hacheka">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="styles/styles.css">
+
+</head>
+
+<body class="page">
+  <div class="container">
+    
+    <div class="inputs">
+      <input id="line1" type="text" class="inputs__text" value="" />
+      <input id="line2" type="text" class="inputs__text" value="" />
+      <div class="inputs__image">
+        <p class="inputs__image-text">Image one</p>
+        <input id="image-one" type="file" accept="image/*"/>
+      </div>
+      <div class="inputs__image">
+        <p class="inputs__image-text">Image two</p>
+        <input id="image-two" type="file" accept="image/*"/>
+      </div>
+    </div>
+    <div id="cover-container" class="cover">
+      <canvas id="cover" class="cover__canvas" width="1024" height="1024"></canvas>
+      <a id="download" class="cover__download" href='#' target="_blank">Get cover</a>
+    </div>
+  </div>
+  <script src="output/bundle.min.js"></script>
+</body>
+</html>

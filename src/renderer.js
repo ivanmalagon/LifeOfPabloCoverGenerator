@@ -1,6 +1,5 @@
 const stateManager = require('./stateManager');
 
-const coverContainerId = 'cover-container';
 const coverId = 'cover';
 
 const renderState = () => {
@@ -109,24 +108,6 @@ const renderState = () => {
   }
 };
 
-const resizeCanvas = () => {
-  const container = document.getElementById(coverContainerId);
-  const cover = document.getElementById(coverId);
-  let newSize;
-
-  if (container.clientHeight > container.clientWidth) {
-    newSize = container.clientWidth;
-  } else {
-    newSize = container.clientHeight;
-  }
-  newSize -= 128;
-
-  cover.style.height = `${newSize}px`;
-  cover.style.width = `${newSize}px`;
-
-  renderState();
-};
-
 stateManager.addSubscriber(renderState);
 
 const getCover = () => {
@@ -137,6 +118,5 @@ const getCover = () => {
 
 module.exports = {
   renderState,
-  resizeCanvas,
   getCover
 };

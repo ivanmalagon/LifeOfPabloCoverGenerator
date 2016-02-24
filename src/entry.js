@@ -3,25 +3,6 @@ const renderer = require('./renderer');
 const stateManager = require('./stateManager');
 const imagesHandling = require('./imagesHandling');
 
-((function optResize() {
-  const throttle = (type, name, obj) => {
-    const ob = obj || window;
-    let running = false;
-    const func = () => {
-      if (running) { return; }
-      running = true;
-      requestAnimationFrame(() => {
-        ob.dispatchEvent(new CustomEvent(name));
-        running = false;
-      });
-    };
-    ob.addEventListener(type, func);
-  };
-
-  /* init - you can init any event */
-  throttle('resize', 'optimizedResize');
-})());
-
 function handleImage(file, imageNumber) {
   imagesHandling.loadImageFromFile(file, imageNumber);
 }
@@ -65,8 +46,6 @@ function downloadCover(evt) {
   target.href = cover;
 }
 
-window.addEventListener('optimizedResize', renderer.resizeCanvas);
-
 document.getElementById('image-one')
   .addEventListener('change', handleFamilyImage, false);
 
@@ -97,7 +76,6 @@ function init() {
   input2.value = state.line2;
   imagesHandling.renderImageToState(initialImages.family, 1);
   imagesHandling.renderImageToState(initialImages.bigAss, 2);
-  renderer.resizeCanvas();
 }
 
 init();

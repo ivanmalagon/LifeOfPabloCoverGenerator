@@ -51,27 +51,6 @@
 	var stateManager = __webpack_require__(3);
 	var imagesHandling = __webpack_require__(4);
 
-	(function optResize() {
-	  var throttle = function throttle(type, name, obj) {
-	    var ob = obj || window;
-	    var running = false;
-	    var func = function func() {
-	      if (running) {
-	        return;
-	      }
-	      running = true;
-	      requestAnimationFrame(function () {
-	        ob.dispatchEvent(new CustomEvent(name));
-	        running = false;
-	      });
-	    };
-	    ob.addEventListener(type, func);
-	  };
-
-	  /* init - you can init any event */
-	  throttle('resize', 'optimizedResize');
-	})();
-
 	function handleImage(file, imageNumber) {
 	  imagesHandling.loadImageFromFile(file, imageNumber);
 	}
@@ -115,8 +94,6 @@
 	  target.href = cover;
 	}
 
-	window.addEventListener('optimizedResize', renderer.resizeCanvas);
-
 	document.getElementById('image-one').addEventListener('change', handleFamilyImage, false);
 
 	document.getElementById('image-two').addEventListener('change', handleBigAssImage, false);
@@ -140,7 +117,6 @@
 	  input2.value = state.line2;
 	  imagesHandling.renderImageToState(initialImages.family, 1);
 	  imagesHandling.renderImageToState(initialImages.bigAss, 2);
-	  renderer.resizeCanvas();
 	}
 
 	init();
@@ -172,7 +148,6 @@
 
 	var stateManager = __webpack_require__(3);
 
-	var coverContainerId = 'cover-container';
 	var coverId = 'cover';
 
 	var renderState = function renderState() {
@@ -263,24 +238,6 @@
 	  }
 	};
 
-	var resizeCanvas = function resizeCanvas() {
-	  var container = document.getElementById(coverContainerId);
-	  var cover = document.getElementById(coverId);
-	  var newSize = undefined;
-
-	  if (container.clientHeight > container.clientWidth) {
-	    newSize = container.clientWidth;
-	  } else {
-	    newSize = container.clientHeight;
-	  }
-	  newSize -= 128;
-
-	  cover.style.height = newSize + 'px';
-	  cover.style.width = newSize + 'px';
-
-	  renderState();
-	};
-
 	stateManager.addSubscriber(renderState);
 
 	var getCover = function getCover() {
@@ -291,7 +248,6 @@
 
 	module.exports = {
 	  renderState: renderState,
-	  resizeCanvas: resizeCanvas,
 	  getCover: getCover
 	};
 
